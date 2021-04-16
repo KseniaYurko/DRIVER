@@ -1,19 +1,23 @@
 import os
+import datetime
 
-path = r'C:/Users/user/Desktop/DRIVER' 
+path = r'/home/pi/ADC' 
+
+now = datetime.datetime.now()
+DATE = now.strftime("%d.%m.%Y-%H:%M:%S")
+
+try:
+    os.mkdir(path)
+
+    file = '{}.txt'.format(DATE)
+    open(os.path.join(path, file), "w")
+
+    #здесь должна быть программа записи значений
+
+
+except FileExistsError:   
+
+    file = '{}.txt'.format(DATE)
+    open(os.path.join(path, file), "w")
     
-i = 0
-
-with open(os.path.join(path,'test.txt'), 'r') as counter_file:     
-
-        i = int(counter_file.read())
-        counter_file.seek(0)
-        counter_file.close()        
-
-        i += 1      
-
-with open(os.path.join(path,'test.txt'), 'w+') as counter_file:     
-
-        counter_file.write(str(i))
-        counter_file.seek(0)
-        counter_file.close() 
+    #здесь должна быть программа записи значений
