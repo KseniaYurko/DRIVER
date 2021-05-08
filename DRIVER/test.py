@@ -1,7 +1,2 @@
-import os
+print(int('1101', base=2))
 
-path = r'C:/Users/user/Desktop/Hello_world.txt' 
-
-file = open(path, 'w')  # создаем txt файл
-file.write('Hello, World!') # записываем текст
-file.close()  # закрываем файл
