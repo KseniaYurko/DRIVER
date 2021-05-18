@@ -10,14 +10,14 @@ spi_ch = 0
 spi = spidev.SpiDev()
 spi.open(0, spi_ch)
 spi.max_speed_hz = 1200000
-spi.cshigh = False     #cs активен в 0
-spi.mode = 0b01
-spi.bits_per_word = 12
+spi.cshigh = False     #cs активен в 0     0x8C30   0b1000110000110000
+spi.mode = 0b00
+
 
 
 def read_adc(adc_ch, vref = 10):
 
-    msg = 0b1000110000110000  #настройка 
+    msg = 0x8C30  #настройка 
     reply = spi.xfer2(msg)   #cs активен между транзакциями (2)
     for i in reply:          #xfer2(list of values, [speed_hz, delay_usec, bits_per_word])  
         volt = (vref*adc)/4096

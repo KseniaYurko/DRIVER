@@ -1,11 +1,15 @@
-import spidev    #интерфейс SPI
-spi = spidev.SpiDev() 
-spi.open(0, 0)   #активирую порт SPI0_CE0_N (выбор из SPI0_CE0_N и SPI0_CE1_N - их всего два на плате)
-                 #создаю обьект для работы с SPI и произвожу подключение
-                #аргументы функции open выбирают порт
-
-spi.lsbfirst = False
-spi.cshigh = False
-spi.mode = 0b01
-spi.bits_per_word = 12
+reply = [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+adc = 0
+#1111100000   [1, 1, 1, 1, 1, 0, 0, 0, 0, 0]
+vref = 3.3
+for n in reply:
+    adc1 = (adc << 8) + n
+    binary1 = bin(adc1)[2:].zfill(8) 
+    print(adc1, '  ', binary1)
+    adc2 = adc >> 1
+    binary2 = bin(adc2)[2:].zfill(8)
+    print(adc2, '  ', binary2)
+adc = adc2
+voltage = (vref * adc) / 1024
+print (voltage)
 
